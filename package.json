@@ -1,0 +1,20 @@
+{
+  "name": "feedie",
+  "version": "0.1.4",
+  "description": "feed api implemented with redis",
+  "main": "index.js",
+  "scripts": {},
+  "author": "ltebean",
+  "license": "MIT",
+  "keywords": [
+    "feed",
+    "timeline",
+    "redis"
+  ],
+  "dependencies": {
+    "string-format": "^0.2.1",
+    "async": "^0.9.0",
+    "user-graph": "^0.1.6",
+    "redis": "^0.10.3"
+  }
+}
