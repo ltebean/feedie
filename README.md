@@ -33,3 +33,5 @@ feedie.user('spud').feedList(0, 10, function(err, res) {
 });
 
 ```
+
+more example see test/index.js
