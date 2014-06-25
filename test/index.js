@@ -1,31 +1,28 @@
-var feed = require('../').init({
-    host: '127.0.0.1',
-    port: '6379',
-    options: {},
-    namespace: 'usergraph'
+var redis = require('redis');
+var client = redis.createClient();
+
+var feedie = require('../').initWithRedisClient({
+    client: client,
+    namespace: 'feedie'
 });
 
-var graph = feed.graph;
+var graph = require('user-graph').initWithRedisClient({
+    client: client,
+    namespace: 'feedie'
+});
+
+graph.user('ltebean').follow('kael', function(err, res) {});
+graph.user('spud').follow('kael', function(err, res) {});
 
 
-graph.follow('ltebean', 'kael', function(err, res) {})
-graph.follow('ltebean', 'spud', function(err, res) {})
+feedie.user('kael').event('broadcast').broadcast(function() {});
+feedie.user('kael').event('to ltebean').sendTo('ltebean',function() {});
 
 
-feed.broadcastBy('kael', {
-    action: 'new project',
-    detail: 'add a package called blabla'
-}, function() {})
-
-feed.sendTo('ltebean', {
-    action: 'follow',
-    detail: 'some one follows you'
-}, function() {})
-
-feed.load('ltebean', 0, 10, function(err, res) {
+feedie.user('ltebean').feedList(0, 10, function(err, res) {
     console.log("ltebean's feed: %s", JSON.stringify(res))
 });
 
-feed.load('spud', 0, 10, function(err, res) {
+feedie.user('spud').feedList(0, 10, function(err, res) {
     console.log("spud's feed: %s", JSON.stringify(res))
 });
