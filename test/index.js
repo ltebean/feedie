@@ -3,7 +3,8 @@ var client = redis.createClient();
 
 var feedie = require('../').initWithRedisClient({
     client: client,
-    namespace: 'feedie'
+    namespace: 'feedie',
+    maxSize:5
 });
 
 var graph = require('user-graph').initWithRedisClient({
@@ -19,10 +20,10 @@ feedie.user('kael').event('broadcast').broadcast(function() {});
 feedie.user('kael').event('to ltebean').sendTo('ltebean',function() {});
 
 
-feedie.user('ltebean').feedList(0, 10, function(err, res) {
+feedie.user('ltebean').feedList(1, 10, function(err, res) {
     console.log("ltebean's feed: %s", JSON.stringify(res))
 });
 
-feedie.user('spud').feedList(0, 10, function(err, res) {
+feedie.user('spud').feedList(1, 10, function(err, res) {
     console.log("spud's feed: %s", JSON.stringify(res))
 });
