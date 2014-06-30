@@ -1,6 +1,6 @@
 {
   "name": "feedie",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "feed api implemented with redis",
   "main": "index.js",
   "scripts": {},
